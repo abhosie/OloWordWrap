@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="docker-compose.yml" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/OloWordWrap.Api/OloWordWrap.Api.csproj" />
+    <Project Path="src/OloWordWrap.Application/OloWordWrap.Application.csproj" />
+    <Project Path="src/OloWordWrap.Domain/OloWordWrap.Domain.csproj" />
+    <Project Path="src/OloWordWrap.Infrastructure/OloWordWrap.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OloWordWrap.IntegrationTests/OloWordWrap.IntegrationTests.csproj" />
+    <Project Path="tests/OloWordWrap.UnitTests/OloWordWrap.UnitTests.csproj" />
+  </Folder>
+</Solution>

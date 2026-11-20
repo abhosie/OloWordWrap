@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <UserSecretsId>7bbdfab8-d009-41cc-ac28-d48a5ce78b94</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OloWordWrap.Application\OloWordWrap.Application.csproj" />
+    <ProjectReference Include="..\OloWordWrap.Infrastructure\OloWordWrap.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+  </ItemGroup>
+
+</Project>

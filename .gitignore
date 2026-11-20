@@ -1,0 +1,21 @@
+# .NET
+bin/
+obj/
+TestResults/
+*.user
+.vs/
+
+# Node / Vite
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+
+# Local secrets and per-machine settings
+.env
+.env.local
+
+# OS
+Thumbs.db
+.DS_Store

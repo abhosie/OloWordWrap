@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# A newer push to the same branch or PR cancels the run in progress.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  api:
+    name: API - build, format, unit and integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      # Warnings are errors and NuGet audit is on, so a known vulnerability fails here.
+      - run: dotnet build OloWordWrap.slnx --configuration Release
+      - run: dotnet format OloWordWrap.slnx --verify-no-changes --no-restore
+      - run: dotnet test --configuration Release --no-build
