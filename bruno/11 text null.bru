@@ -1,0 +1,30 @@
+meta {
+  name: 11 text null (400)
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=10
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 10
+}
+
+body:json {
+  { "text": null }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("problem+json with errors", function () {
+    expect(res.getHeader("content-type")).to.contain("application/problem+json");
+    expect(res.getBody().errors).to.be.an("object");
+  });
+}

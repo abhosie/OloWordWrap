@@ -1,0 +1,33 @@
+meta {
+  name: 14 body over 64 KB (413)
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=20
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 20
+}
+
+body:json {
+  { "text": "set by the pre-request script" }
+}
+
+script:pre-request {
+  req.setBody({ text: "a".repeat(70000) });
+}
+
+assert {
+  res.status: eq 413
+}
+
+tests {
+  test("problem+json, not a 500", function () {
+    expect(res.getHeader("content-type")).to.contain("application/problem+json");
+  });
+}

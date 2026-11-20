@@ -1,0 +1,26 @@
+meta {
+  name: 08 limit missing (400)
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap
+  body: json
+  auth: none
+}
+
+body:json {
+  { "text": "No utensils" }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("problem+json with errors", function () {
+    expect(res.getHeader("content-type")).to.contain("application/problem+json");
+    expect(res.getBody().errors).to.be.an("object");
+  });
+}

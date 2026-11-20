@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using OloWordWrap.Application.SampleItems;
+using OloWordWrap.Application.WordWrapping;
 
 namespace OloWordWrap.Application;
 
@@ -7,7 +7,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<GetSampleItemsHandler>();
+        services.AddScoped<WrapTextHandler>();
 
         return services;
     }

@@ -1,6 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using OloWordWrap.Application.SampleItems;
-using OloWordWrap.Infrastructure.InMemory.SampleItems;
 
 namespace OloWordWrap.Infrastructure;
 
@@ -12,8 +10,6 @@ public static class DependencyInjection
     /// </summary>
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddSingleton<ISampleItemRepository, InMemorySampleItemRepository>();
-
         return services;
     }
 }

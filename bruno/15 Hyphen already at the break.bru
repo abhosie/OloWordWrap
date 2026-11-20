@@ -1,0 +1,30 @@
+meta {
+  name: 15 Hyphen already at the break
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=6
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 6
+}
+
+body:json {
+  { "text": "well-done steak" }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("piece ending in a hyphen gets no second one", function () {
+    expect(res.getBody().lines).to.eql(["well-", "done", "steak"]);
+    expect(res.getBody().wrapped).to.eql("well-\ndone\nsteak");
+  });
+}

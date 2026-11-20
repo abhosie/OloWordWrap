@@ -1,0 +1,30 @@
+meta {
+  name: 03 Long word split at limit 6 (hyphenated)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=6
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 6
+}
+
+body:json {
+  { "text": "Supercalifragilistic" }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("lines and wrapped", function () {
+    expect(res.getBody().lines).to.eql(["Super-", "calif-", "ragil-", "istic"]);
+    expect(res.getBody().wrapped).to.eql("Super-\ncalif-\nragil-\nistic");
+  });
+}

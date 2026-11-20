@@ -1,0 +1,30 @@
+meta {
+  name: 04 Extra spaces collapsed
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=20
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 20
+}
+
+body:json {
+  { "text": "   No    utensils  " }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("lines and wrapped", function () {
+    expect(res.getBody().lines).to.eql(["No utensils"]);
+    expect(res.getBody().wrapped).to.eql("No utensils");
+  });
+}

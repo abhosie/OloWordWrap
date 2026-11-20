@@ -1,0 +1,30 @@
+meta {
+  name: 16 Hyphen exactly at the limit
+  type: http
+  seq: 16
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=6
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 6
+}
+
+body:json {
+  { "text": "abcde-fgh" }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("the existing hyphen is the break; the next line doesn't start with one", function () {
+    expect(res.getBody().lines).to.eql(["abcde-", "fgh"]);
+    expect(res.getBody().wrapped).to.eql("abcde-\nfgh");
+  });
+}

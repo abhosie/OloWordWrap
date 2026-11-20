@@ -24,7 +24,7 @@ else
     app.UseHttpsRedirection();
 }
 
-// Before CORS and auth, so rejected requests (e.g. bad tokens) are limited too and cost nothing more.
+// Before the controllers, so a client over its limit is turned away before any work is done.
 app.UseRateLimiter();
 
 app.MapControllers();

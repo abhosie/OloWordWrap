@@ -9,7 +9,7 @@ internal static class DependencyInjection
     {
         services.AddControllers();
         services.AddProblemDetails();
-        // Infrastructure adds its own checks (e.g. the database) to the same /health endpoint.
+        services.AddExceptionHandler<BadRequestExceptionHandler>();
         services.AddHealthChecks();
         services.AddOpenApi();
         services.AddRateLimiting(configuration);

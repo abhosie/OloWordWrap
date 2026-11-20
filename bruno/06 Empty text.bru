@@ -1,0 +1,30 @@
+meta {
+  name: 06 Empty text
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=10
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 10
+}
+
+body:json {
+  { "text": "" }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("lines and wrapped", function () {
+    expect(res.getBody().lines).to.eql([]);
+    expect(res.getBody().wrapped).to.eql("");
+  });
+}

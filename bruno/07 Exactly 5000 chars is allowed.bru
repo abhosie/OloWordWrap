@@ -1,0 +1,33 @@
+meta {
+  name: 07 Exactly 5000 chars is allowed
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=100
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 100
+}
+
+body:json {
+  { "text": "set by the pre-request script" }
+}
+
+script:pre-request {
+  req.setBody({ text: "a".repeat(5000) });
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("50 lines of 100 a-s", function () {
+    expect(res.getBody().lines.length).to.eql(50);
+  });
+}

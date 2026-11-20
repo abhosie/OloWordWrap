@@ -1,0 +1,34 @@
+meta {
+  name: 13 text over 5000 chars (400)
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=10
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 10
+}
+
+body:json {
+  { "text": "set by the pre-request script" }
+}
+
+script:pre-request {
+  req.setBody({ text: "a".repeat(5001) });
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("problem+json with errors", function () {
+    expect(res.getHeader("content-type")).to.contain("application/problem+json");
+    expect(res.getBody().errors).to.be.an("object");
+  });
+}

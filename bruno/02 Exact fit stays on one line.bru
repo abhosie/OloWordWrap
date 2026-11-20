@@ -1,0 +1,30 @@
+meta {
+  name: 02 Exact fit stays on one line
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/word-wrap?limit=11
+  body: json
+  auth: none
+}
+
+params:query {
+  limit: 11
+}
+
+body:json {
+  { "text": "No utensils" }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("lines and wrapped", function () {
+    expect(res.getBody().lines).to.eql(["No utensils"]);
+    expect(res.getBody().wrapped).to.eql("No utensils");
+  });
+}
